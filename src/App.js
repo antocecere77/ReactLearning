@@ -14,12 +14,12 @@ class App extends Component {
     otherState: 'some other value'
   }
 
-  switchNameHandler = () => {
+  switchNameHandler = (newName) => {
     // console.log('Was clicked!');
     // DON'T DO THIS 'this.state.persons[0].name = 'Anto'; 
     this.setState({
       persons: [
-        { name: 'Anto', age: 43 },
+        { name: newName, age: 43 },
         { name: 'Max', age: 29 },
         { name: 'Manu', age: 32 },
         { name: 'John', age: 25 }
@@ -32,11 +32,20 @@ class App extends Component {
       <div className="App">
         <h1>Hi, I'm a React App</h1>
         <p>This is really working</p>
-        <button onClick={this.switchNameHandler}>Switch Name</button>
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age}/>
-        <Person name={this.state.persons[1].name} age={this.state.persons[1].age}/>
-        <Person name={this.state.persons[2].name} age={this.state.persons[2].age}>My Hobbies: Racing</Person>
-        <Person name={this.state.persons[3].name} age={this.state.persons[3].age}/>
+        <button onClick={this.switchNameHandler.bind(this, 'Anto')}>Switch Name</button>
+        <Person 
+            name={this.state.persons[0].name} 
+            age={this.state.persons[0].age}
+            click={this.switchNameHandler.bind(this, 'Anto!!!')}/>
+        <Person 
+            name={this.state.persons[1].name} 
+            age={this.state.persons[1].age}/>
+        <Person 
+            name={this.state.persons[2].name} 
+            age={this.state.persons[2].age}>My Hobbies: Racing</Person>
+        <Person 
+            name={this.state.persons[3].name} 
+            age={this.state.persons[3].age}/>
       </div>    
     );
     //return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a React App!!!'));
