@@ -27,9 +27,9 @@ class App extends Component {
     return state;
   }
 
-  componentWillMount() {
-    console.log('[App-js] componentWillMount');
-  }
+  //componentWillMount() {
+  //  console.log('[App-js] componentWillMount');
+  //}
 
   componentDidMount() {
     console.log('[App-js] componentDidMount');
@@ -68,8 +68,7 @@ class App extends Component {
 
   render() {
     console.log('[App.js] render');
-    let persons = null;
-    let btnClass = '';
+    let persons = null;   
 
     if(this.state.showPersons) {
       persons = <Persons 
