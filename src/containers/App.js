@@ -23,13 +23,14 @@ class App extends Component {
     otherState: 'some other value',
     showPersons: false,
     showCockpit: true,
-    changeCounter: 0
-  }
+    changeCounter: 0,
+    authenticated: false
+  };
 
   static getDerivedStateFromProps(props, state) {
     console.log('[App-js] getDerivedStateFromProps', props);
     return state;
-  }
+  };
 
   //componentWillMount() {
   //  console.log('[App-js] componentWillMount');
@@ -37,16 +38,16 @@ class App extends Component {
 
   componentDidMount() {
     console.log('[App-js] componentDidMount');
-  }
+  };
 
   componentDidUpdate() {
     console.log('[App-js] componentDidUpdate');
-  }
+  };
 
   shouldComponentUpdate(nextProps, nextState) {
     console.log('[App-js] shouldComponentUpdate');
     return true;
-  }
+  };
 
   nameChangedHandler = ( event, id ) => {
     const personIndex = this.state.persons.findIndex(p => {
@@ -70,19 +71,23 @@ class App extends Component {
         changeCounter: prevState.changeCounter + 1
       } 
     });
-  }
+  };
 
   deletePersonHandler = (personIndex) => {
     //const persons = this.state.persons.slice();
     const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
     this.setState({persons: persons});
-  }
+  };
 
   togglePersonsHandler = () => {
     const douesShow = this.state.showPersons;
     this.setState({ showPersons: !douesShow });
-  }
+  };
+
+  loginHandler = () => {
+    this.setState({authenticated: true});
+  };
 
   render() {
     console.log('[App.js] render');
@@ -92,7 +97,8 @@ class App extends Component {
       persons = <Persons 
                   persons={this.state.persons} 
                   clicked={this.deletePersonHandler}
-                  changed={this.nameChangedHandler}/>                                          
+                  changed={this.nameChangedHandler}
+                  isAuthenticated={this.state.authenticated}/>                                          
     }
 
     return (
@@ -103,7 +109,8 @@ class App extends Component {
               title={this.props.appTitle}
               showPersons={this.state.showPersons}
               personsLength={this.state.persons.length}
-              clicked={this.togglePersonsHandler}/> : null}
+              clicked={this.togglePersonsHandler}
+              login={this.loginHandler}/> : null}
           { persons }  
         </Aux>        
     );
